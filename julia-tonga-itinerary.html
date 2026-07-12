@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Julia's Tonga Whale Expedition · Aug 20–30, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lagoon:#EFF8F7;        /* pale seafoam page */
+    --deep:#0A2C38;          /* deep-ocean navy ink */
+    --teal:#137082;          /* mid-water teal */
+    --foam:#FFFFFF;
+    --sun:#E8A93D;           /* date-line gold */
+    --mist:#CBE4E2;          /* hairlines */
+    --shadow:0 10px 30px rgba(10,44,56,.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    font-family:'Karla',sans-serif;
+    background:var(--lagoon);
+    color:var(--deep);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .display{font-family:'Marcellus',serif;font-weight:400}
+  .mono{font-family:'IBM Plex Mono',monospace}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:linear-gradient(180deg,#0A2C38 0%,#0E3D4E 55%,#137082 100%);
+    color:var(--lagoon);
+    text-align:center;
+    padding:5rem 1.5rem 4rem;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .eyebrow{
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    font-size:.75rem;
+    color:#8FD0CD;
+    margin-bottom:1.2rem;
+  }
+  .hero h1{
+    font-size:clamp(2.2rem,6vw,4rem);
+    line-height:1.12;
+    max-width:16ch;
+    margin:0 auto .9rem;
+  }
+  .hero .dates{
+    color:#BFE6E2;
+    font-size:1.05rem;
+    letter-spacing:.06em;
+  }
+
+  /* ---------- LAYOUT ---------- */
+  main{max-width:720px;margin:0 auto;padding:3.5rem 1.25rem 4rem}
+  section{margin-bottom:3.5rem}
+  .section-label{
+    display:flex;align-items:center;gap:.75rem;
+    margin-bottom:1.5rem;
+  }
+  .section-label h2{
+    font-size:clamp(1.45rem,3.5vw,1.8rem);
+    letter-spacing:.01em;
+  }
+  .section-label .emoji{font-size:1.4rem}
+  .section-label::after{
+    content:"";flex:1;height:1px;background:var(--mist);
+  }
+
+  /* ---------- TIMELINE CARDS ---------- */
+  .leg{position:relative;padding-left:1.9rem;margin-bottom:1.75rem}
+  .leg::before{ /* route line */
+    content:"";position:absolute;left:.42rem;top:1.4rem;bottom:-1.75rem;
+    width:2px;background:linear-gradient(180deg,var(--teal),var(--mist));
+  }
+  .leg:last-child::before{display:none}
+  .leg::after{ /* node */
+    content:"";position:absolute;left:0;top:.55rem;
+    width:.9rem;height:.9rem;border-radius:50%;
+    background:var(--foam);border:3px solid var(--teal);
+  }
+  .leg .day{
+    font-size:.78rem;text-transform:uppercase;letter-spacing:.18em;
+    color:var(--teal);font-weight:700;margin-bottom:.35rem;
+  }
+  .card{
+    background:var(--foam);
+    border:1px solid var(--mist);
+    border-radius:14px;
+    box-shadow:var(--shadow);
+    padding:1.25rem 1.4rem;
+  }
+  .card h3{font-size:1.15rem;margin-bottom:.5rem}
+  .route{
+    display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;
+    font-size:1.05rem;font-weight:700;
+  }
+  .route .arrow{color:var(--teal)}
+  .time{
+    font-size:.95rem;color:var(--teal);font-weight:500;
+  }
+  .meta{
+    margin-top:.6rem;padding-top:.6rem;border-top:1px dashed var(--mist);
+    font-size:.9rem;color:#3E6470;
+  }
+  ul.plain{list-style:none;margin-top:.5rem}
+  ul.plain li{
+    padding-left:1.15rem;position:relative;margin-bottom:.3rem;
+  }
+  ul.plain li::before{
+    content:"◦";position:absolute;left:.15rem;color:var(--teal);
+  }
+
+  /* ---------- WHALE WEEK BANNER ---------- */
+  .whale-week{
+    background:linear-gradient(135deg,#0E3D4E,#137082);
+    color:var(--lagoon);
+    border-radius:18px;
+    padding:2rem 1.6rem;
+    text-align:center;
+    box-shadow:var(--shadow);
+  }
+  .whale-week h3{font-size:clamp(1.4rem,4vw,1.8rem);margin-bottom:.3rem}
+  .whale-week .dates{color:#9FD9D4;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;margin-bottom:1rem}
+  .whale-week ul{
+    list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem .6rem;
+  }
+  .whale-week li{
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.22);
+    border-radius:999px;
+    padding:.35rem .95rem;font-size:.9rem;
+  }
+
+  /* ---------- DATE LINE CALLOUT (signature) ---------- */
+  .dateline{
+    position:relative;
+    background:var(--foam);
+    border:1px solid var(--mist);
+    border-left:5px solid var(--sun);
+    border-radius:14px;
+    padding:1.4rem 1.5rem 1.4rem 1.6rem;
+    box-shadow:var(--shadow);
+  }
+  .dateline .badge{
+    display:inline-block;
+    background:var(--sun);color:#3D2A05;
+    font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+    border-radius:999px;padding:.28rem .8rem;margin-bottom:.7rem;
+  }
+  .dateline .big{
+    font-size:clamp(1.25rem,3.5vw,1.55rem);
+    line-height:1.35;
+  }
+  .dateline .big strong{color:var(--teal)}
+
+  /* ---------- TABLES ---------- */
+  table{width:100%;border-collapse:collapse;background:var(--foam);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--mist)}
+  th,td{padding:.7rem 1rem;text-align:left;font-size:.95rem}
+  thead th{background:var(--deep);color:var(--lagoon);font-weight:700;letter-spacing:.04em;font-size:.85rem;text-transform:uppercase}
+  tbody tr+tr td{border-top:1px solid var(--mist)}
+  .tz-notes{margin-top:.9rem;font-size:.92rem;color:#3E6470}
+  .tz-notes p{margin-bottom:.2rem}
+
+  /* ---------- BOOKING REFS ---------- */
+  .refs{display:grid;gap:.9rem}
+  @media(min-width:560px){.refs{grid-template-columns:repeat(3,1fr)}}
+  .ref{
+    background:var(--foam);border:1px solid var(--mist);border-radius:14px;
+    padding:1rem 1.1rem;box-shadow:var(--shadow);
+  }
+  .ref .label{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:#3E6470;margin-bottom:.4rem}
+  .ref .code{
+    font-size:1.25rem;font-weight:500;letter-spacing:.14em;color:var(--teal);
+    background:var(--lagoon);border:1px dashed var(--mist);border-radius:8px;
+    padding:.35rem .7rem;display:inline-block;
+  }
+
+  footer{
+    text-align:center;color:#5B8390;font-size:.85rem;
+    padding:0 1.5rem 3rem;
+  }
+  footer .display{font-size:1.05rem;color:var(--teal);margin-bottom:.25rem}
+
+  @media print{
+    .hero{background:var(--foam);color:var(--deep)}
+    
+    .card,.ref,table{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <p class="eyebrow">Kingdom of Tonga · Vava'u</p>
+  <h1 class="display">Julia's Whale Expedition</h1>
+  <p class="dates mono">August 20 – 30, 2026</p>
+
+</header>
+
+<main>
+
+  <!-- OUTBOUND -->
+  <section>
+    <div class="section-label"><span class="emoji">✈️</span><h2 class="display">Outbound Journey</h2></div>
+
+    <div class="leg">
+      <p class="day">Thursday · August 20</p>
+      <div class="card">
+        <p class="route">Honolulu (HNL) <span class="arrow">→</span> Vava'u, Tonga (VAV)</p>
+        <p class="time mono">10:55 PM · Depart Honolulu</p>
+        <div class="meta">
+          Fiji Airways · 2 stops (Nadi &amp; Tongatapu) · Total travel time ≈ 12.5 hours
+        </div>
+      </div>
+    </div>
+
+    <div class="leg">
+      <p class="day">Saturday · August 22</p>
+      <div class="card">
+        <p class="time mono">10:25 AM · Arrive in Vava'u (Neiafu), Tonga</p>
+        <ul class="plain">
+          <li>Taxi to hotel (if arriving before dive trip begins)</li>
+          <li>Relax and recover from travel</li>
+          <li>Pick up local SIM / eSIM if needed</li>
+          <li>Prepare camera gear</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHALE WEEK -->
+  <section>
+    <div class="section-label"><span class="emoji">🐋</span><h2 class="display">Whale Swim Expedition</h2></div>
+    <div class="whale-week">
+      <h3 class="display">A full week swimming with humpback whales</h3>
+      <p class="dates mono">August 23 – 29</p>
+      <ul>
+        <li>Stay with expedition group</li>
+        <li>Photography</li>
+        <li>Freediving</li>
+        <li>Enjoy Vava'u</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- RETURN -->
+  <section>
+    <div class="section-label"><span class="emoji">✈️</span><h2 class="display">Return Journey</h2></div>
+
+    <div class="leg">
+      <p class="day">Saturday · August 29</p>
+      <div class="card">
+        <p class="route">Vava'u (VAV) <span class="arrow">→</span> Nadi, Fiji (NAN)</p>
+        <p class="time mono">5:20 PM depart · 6:40 PM arrive</p>
+        <div class="meta">
+          🏨 <strong>Overnight — Fiji Gateway Hotel</strong>
+          <ul class="plain">
+            <li>Airport shuttle available</li>
+            <li>Dinner at hotel</li>
+            <li>Relax after the expedition</li>
+            <li>Pack for flight home</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="leg">
+      <p class="day">Sunday · August 30</p>
+      <div class="card">
+        <h3 class="display">Suggested morning in Nadi</h3>
+        <ul class="plain">
+          <li>Breakfast at the hotel</li>
+          <li>Optional taxi to Wailoaloa Beach for sunrise / photos (10–15 min away)</li>
+          <li>Return to hotel, shuttle back to airport</li>
+        </ul>
+        <div class="meta">Recommended airport arrival: <strong class="mono">11:00 AM</strong></div>
+      </div>
+    </div>
+
+    <div class="leg">
+      <p class="day">Sunday · August 30</p>
+      <div class="card">
+        <p class="route">Nadi (NAN) <span class="arrow">→</span> Honolulu (HNL)</p>
+        <p class="time mono">1:35 PM · Depart Nadi</p>
+        <div class="meta">Fiji Airways · Nonstop · Flight time 6 hr 35 min · Crosses the International Date Line</div>
+      </div>
+    </div>
+
+    <div class="leg">
+      <p class="day">Saturday · August 29 🏝️</p>
+      <div class="dateline">
+        <span class="badge">International Date Line</span>
+        <p class="big display">Land in Honolulu <strong>Saturday, Aug 29 · 10:10 PM HST</strong> — the night <em>before</em> you took off.</p>
+        <p class="tz-notes" style="margin-top:.6rem">Although you depart Fiji on Sunday afternoon, you'll arrive back in Hawaiʻi Saturday night thanks to crossing the International Date Line.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIME ZONES -->
+  <section>
+    <div class="section-label"><span class="emoji">🕐</span><h2 class="display">Time Difference Quick Reference</h2></div>
+    <table>
+      <thead><tr><th>Location</th><th>Time zone</th></tr></thead>
+      <tbody>
+        <tr><td>Honolulu</td><td class="mono">HST (UTC−10)</td></tr>
+        <tr><td>Fiji</td><td class="mono">UTC+12</td></tr>
+        <tr><td>Tonga</td><td class="mono">UTC+13</td></tr>
+      </tbody>
+    </table>
+    <div class="tz-notes">
+      <p>• Fiji is 22 hours ahead of Hawaiʻi</p>
+      <p>• Tonga is 23 hours ahead of Hawaiʻi</p>
+      <p>• Tonga is 1 hour ahead of Fiji</p>
+    </div>
+  </section>
+
+  <!-- BOOKING REFS -->
+  <section>
+    <div class="section-label"><span class="emoji">🎟️</span><h2 class="display">Booking References</h2></div>
+    <div class="refs">
+      <div class="ref">
+        <p class="label">Outbound · HNL → Vava'u</p>
+        <span class="code mono">DS4VHY</span>
+      </div>
+      <div class="ref">
+        <p class="label">Return · Vava'u → Nadi</p>
+        <span class="code mono">DR3PO6</span>
+      </div>
+      <div class="ref">
+        <p class="label">Nadi → Honolulu</p>
+        <span class="code mono">DS5324</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p class="display">Mālō e lelei &amp; safe travels, Julia 🐋</p>
+  <p>Honolulu → Vava'u → Nadi → home · August 2026</p>
+</footer>
+
+</body>
+</html>
